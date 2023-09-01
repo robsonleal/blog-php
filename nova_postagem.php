@@ -1,4 +1,7 @@
-<?php include_once 'header.php'; ?>
+<?php
+$currentPage = 'nova_postagem';
+include_once 'header.php';
+?>
 
 <main>
   <div class="container margin-header">
@@ -25,7 +28,7 @@
       </div>
       <textarea id="container" class="editor col-12" name="editor1"></textarea>
       <div class="row mt-5">
-        <button type="button" class="btn btn-light col-5">Cancelar</button>
+        <a href="index.php" class="btn btn-light col-5">Cancelar</a>
         <div class="col-2"></div>
         <button type="submit" class="btn btn-dark col-5">Criar</button>
       </div>
