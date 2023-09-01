@@ -34,9 +34,10 @@
 
         <div class="collapse navbar-collapse justify-content-end text-uppercase" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="nova_postagem.php">+ Nova Postagem</a>
-            </li>
+            <?php if($currentPage != 'nova_postagem'): ?>
+            <li class="nav-item active"><a class="nav-link" href="nova_postagem.php">+ Nova Postagem</a></li>
+            <?php endif; ?>
+          </ul>
         </div>
       </div>
     </nav>
