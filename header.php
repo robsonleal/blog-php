@@ -25,7 +25,7 @@
   <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid p-2 mx-3">
-        <a class="navbar-brand" href="#">{...} Desbugando Blog</a>
+        <a class="navbar-brand" href="index.php">{...} Desbugando Blog</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
