@@ -37,6 +37,6 @@ function buscar_todas_postagens_publicadas($conexao) {
 
 $resultArray = buscar_todas_postagens_publicadas($conexao);
 
-$_SESSION['resultArray'] = $resultArray;
+$_SESSION['postagens'] = $resultArray;
 header("Location: index.php", true, 301);
 exit;

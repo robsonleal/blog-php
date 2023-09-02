@@ -3,8 +3,10 @@ include_once 'header.php';
 include_once 'meses_pt_br.php';
 session_start();
 
-if (isset($_SESSION['resultArray'])) {
-  $resultArray = $_SESSION['resultArray'];
+if (isset($_SESSION['postagens'])) {
+  $postagens = $_SESSION['postagens'];
+} else {
+  include_once 'buscar.php';
 }
 ?>
 
@@ -14,7 +16,7 @@ if (isset($_SESSION['resultArray'])) {
     $dataAnterior = new DateTime();
     $dataAnterior->modify('-1 month');
 
-    foreach ($resultArray as $index => $postagem) {
+    foreach ($postagens as $index => $postagem) {
 
       $data = new DateTime($postagem['DAT_ALTERACAO']);
       $dataFormatada = $data->format('F \d\e Y');
@@ -29,8 +31,6 @@ if (isset($_SESSION['resultArray'])) {
 
       $dataAnterior = $data;
     ?>
-
-
       <div class="row">
         <div class="card bg-light mb-4 col-10 mx-auto">
           <div class="card-body">
