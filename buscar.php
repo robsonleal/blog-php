@@ -34,9 +34,17 @@ function buscar_todas_postagens_publicadas($conexao) {
   while ($row = $resultSet->fetch()) {
 
     $row['TXT_TAGS'] = explode(',', $row['TXT_TAGS']);
+    $row['DAT_ALTERACAO'] = transformar_data_para_fuso_horario_br($row['DAT_ALTERACAO']);
 
     array_push($resultArray, $row);
   }
 
   return $resultArray;
+}
+
+function transformar_data_para_fuso_horario_br($timestamp) {
+  $datetime = new DateTime($timestamp, new DateTimeZone('UTC'));
+  $datetime->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+
+  return $datetime->format('Y-m-d H:i:s');
 }
