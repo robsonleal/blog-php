@@ -3,11 +3,13 @@ include_once 'header.php';
 include_once 'meses_pt_br.php';
 session_start();
 
-if (isset($_SESSION['postagens'])) {
-  $postagens = $_SESSION['postagens'];
-} else {
+if ((!isset($_SESSION['postagens']) && $_SESSION != "") || (isset($_SESSION['atualizar']) && $_SESSION['atualizar'] === true)) {
   include_once 'buscar.php';
+
+  $_SESSION['atualizar'] = false;
 }
+
+$postagens = $_SESSION['postagens'];
 ?>
 
 <main>
