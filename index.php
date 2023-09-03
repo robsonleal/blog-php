@@ -32,11 +32,13 @@ $postagens = $_SESSION['postagens'];
       }
 
       $dataAnterior = $data;
+      $id = $postagem['OID_POSTAGEM'];
     ?>
       <div class="row">
         <div class="card bg-light mb-4 col-10 mx-auto">
           <div class="card-body">
-            <?php echo "<h5 class=\"card-title\"><a href=\"editar.php?id=$id\">" . $postagem['TXT_TITULO']; ?></a></h5>
+            <!-- <?php echo "<h5 class=\"card-title\"><a href=\"editar.php?id=$id\">" . $postagem['TXT_TITULO']; ?></a></h5> -->
+            <?php echo "<h5 class=\"card-title\"><a href=\"detalhes.php?id=$id\">" . $postagem['TXT_TITULO']; ?></a></h5>
             <h6 class="card-subtitle mb-2 text-body-secondary"><?php echo $postagem['DAT_ALTERACAO']; ?></h6>
             <p class="card-text"><?php echo $postagem['TXT_RESUMO']; ?></p>
             <?php foreach ($postagem['TXT_TAGS'] as $tags) {

@@ -8,7 +8,8 @@ session_start();
 $postagem = buscar_postagem($conexao);
 
 $_SESSION['postagem'] = $postagem;
-header("Location: editar.php");
+// header("Location: editar.php");
+header("Location: detalhes.php");
 exit;
 
 function buscar_postagem($conexao)
