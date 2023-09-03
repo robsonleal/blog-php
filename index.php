@@ -4,9 +4,9 @@ include_once 'meses_pt_br.php';
 session_start();
 
 if ((!isset($_SESSION['postagens']) && $_SESSION != "") || (isset($_SESSION['atualizar']) && $_SESSION['atualizar'] === true)) {
-  include_once 'buscar.php';
 
   $_SESSION['atualizar'] = false;
+  include_once 'buscar.php';
 }
 
 $postagens = $_SESSION['postagens'];
@@ -18,7 +18,7 @@ $postagens = $_SESSION['postagens'];
     $dataAnterior = new DateTime();
     $dataAnterior->modify('-1 month');
 
-    foreach ($postagens as $index => $postagem) {
+    foreach ($postagens as $index => $postagem) :
 
       $data = new DateTime($postagem['DAT_ALTERACAO']);
       $dataFormatada = $data->format('F \d\e Y');
@@ -36,7 +36,7 @@ $postagens = $_SESSION['postagens'];
       <div class="row">
         <div class="card bg-light mb-4 col-10 mx-auto">
           <div class="card-body">
-            <h5 class="card-title"><a href="#"><?php echo $postagem['TXT_TITULO']; ?></a></h5>
+            <?php echo "<h5 class=\"card-title\"><a href=\"editar.php?id=$id\">" . $postagem['TXT_TITULO']; ?></a></h5>
             <h6 class="card-subtitle mb-2 text-body-secondary"><?php echo $postagem['DAT_ALTERACAO']; ?></h6>
             <p class="card-text"><?php echo $postagem['TXT_RESUMO']; ?></p>
             <?php foreach ($postagem['TXT_TAGS'] as $tags) {
@@ -45,7 +45,7 @@ $postagens = $_SESSION['postagens'];
           </div>
         </div>
       </div>
-    <?php } ?>
+    <?php endforeach; ?>
   </div>
 </main>
 
