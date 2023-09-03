@@ -2,6 +2,12 @@
 include_once "conexao.php";
 session_start();
 
+$resultArray = buscar_todas_postagens_publicadas($conexao);
+
+$_SESSION['postagens'] = $resultArray;
+header("Location: index.php");
+exit;
+
 function buscar_todas_postagens_publicadas($conexao) {
 
   $resultArray = array();
@@ -34,9 +40,3 @@ function buscar_todas_postagens_publicadas($conexao) {
 
   return $resultArray;
 }
-
-$resultArray = buscar_todas_postagens_publicadas($conexao);
-
-$_SESSION['postagens'] = $resultArray;
-header("Location: index.php", true, 301);
-exit;
