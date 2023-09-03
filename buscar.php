@@ -13,6 +13,7 @@ function buscar_todas_postagens_publicadas($conexao) {
   $resultArray = array();
 
   $sql = "SELECT
+            p.OID_POSTAGEM,
             p.TXT_TITULO,
             p.TXT_RESUMO,
             p.DAT_ALTERACAO,
