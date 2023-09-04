@@ -1,0 +1,18 @@
+{
+    "name": "robson_leal/desbugando-blog",
+    "description": "Blog desenvolvido em PHP",
+    "autoload": {
+        "psr-4": {
+            "RobsonLeal\\DesbugandoBlog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Robson Leal",
+            "email": "robson_leal@outlook.com.br"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
