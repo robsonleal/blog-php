@@ -34,6 +34,10 @@
 
         <div class="collapse navbar-collapse justify-content-end text-uppercase" id="navbarNav">
           <ul class="navbar-nav">
+            <?php if($currentPage == 'detalhes'): ?>
+            <li class="nav-item active"><a class="nav-link" href="editar.php">Editar Postagem</a></li>
+            <li class="nav-item active"><a class="nav-link" href="excluir.php">Excluir Postagem</a></li>
+            <?php endif; ?>
             <?php if($currentPage != 'nova_postagem'): ?>
             <li class="nav-item active"><a class="nav-link" href="nova_postagem.php">+ Nova Postagem</a></li>
             <?php endif; ?>
