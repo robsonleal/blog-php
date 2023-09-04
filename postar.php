@@ -1,12 +1,14 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-include_once "conexao.php";
+require_once __DIR__ . '/vendor/autoload.php';
+require_once 'definir_variaveis_ambiente.php';
+
+use RobsonLeal\DesbugandoBlog\Repository\Conectar;
+
 session_start();
 
 $postagem = $_POST;
-
+$conexaoObj = new Conectar($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
+$conexao = $conexaoObj->conectar();
 $alerta = validar_campos_postagem($postagem);
 $postagem['txt_resumo'] = substr($postagem['txt_texto'], 0, 160);
 

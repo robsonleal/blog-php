@@ -2,6 +2,11 @@
 include_once 'header.php';
 session_start();
 
+// Debug config
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (isset($_SESSION['postagem']) && $_SESSION['postagem'] != "") {
   $postagem = $_SESSION['postagem'];
 } else {
@@ -45,7 +50,7 @@ if (isset($_SESSION['tags'])) {
       </div>
       <textarea name="txt_texto" id="container" class="editor" name="editor1"><?php echo htmlspecialchars($postagem['TXT_TEXTO']); ?></textarea>
       <div class="row mt-5">
-        <a href="index.php" class="btn btn-light col-5">Cancelar</a>
+        <a href="detalhes.php" class="btn btn-light col-5">Cancelar</a>
         <div class="col-2"></div>
         <button type="submit" class="btn btn-dark col-5">Criar</button>
       </div>
