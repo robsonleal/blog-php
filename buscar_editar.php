@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 include_once "conexao.php";
 session_start();
 
@@ -18,24 +15,25 @@ function buscar_postagem($conexao)
 
   try {
     $sql = "SELECT
-            p.TXT_TITULO,
-            p.TXT_TEXTO,
-            p.DAT_ALTERACAO,
-            p.PAR_ATIVO,
-            GROUP_CONCAT(t.TXT_NOME ORDER BY t.TXT_NOME ASC) AS TXT_TAGS
-          FROM
-            desbugando_blog.postagens p
-          LEFT JOIN desbugando_blog.postagens_tags pt ON
-            p.OID_POSTAGEM = pt.OID_POSTAGEM
-          LEFT JOIN desbugando_blog.tags t ON
-            pt.OID_TAG = t.OID_TAG
-          WHERE
-            p.OID_POSTAGEM = :oid_postagem
-          GROUP BY
-            p.OID_POSTAGEM,
-            p.TXT_TITULO
-          ORDER BY
-            p.DAT_ALTERACAO DESC;";
+              p.OID_POSTAGEM,
+              p.TXT_TITULO,
+              p.TXT_TEXTO,
+              p.DAT_ALTERACAO,
+              p.PAR_ATIVO,
+              GROUP_CONCAT(t.TXT_NOME ORDER BY t.TXT_NOME ASC) AS TXT_TAGS
+            FROM
+              desbugando_blog.postagens p
+            LEFT JOIN desbugando_blog.postagens_tags pt ON
+              p.OID_POSTAGEM = pt.OID_POSTAGEM
+            LEFT JOIN desbugando_blog.tags t ON
+              pt.OID_TAG = t.OID_TAG
+            WHERE
+              p.OID_POSTAGEM = :oid_postagem
+            GROUP BY
+              p.OID_POSTAGEM,
+              p.TXT_TITULO
+            ORDER BY
+              p.DAT_ALTERACAO DESC;";
 
     $stmt = $conexao->prepare($sql);
     $stmt->bindParam(':oid_postagem', $_GET['id']);

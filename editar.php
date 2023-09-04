@@ -4,7 +4,6 @@ session_start();
 
 if (isset($_SESSION['postagem']) && $_SESSION['postagem'] != "") {
   $postagem = $_SESSION['postagem'];
-  $_SESSION['postagem'] = "";
 } else {
   include_once 'buscar_editar.php';
 }
