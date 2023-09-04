@@ -1,14 +1,20 @@
 <?php
-include_once "conexao.php";
+require_once __DIR__ . '/vendor/autoload.php';
+require_once 'definir_variaveis_ambiente.php';
+
+use RobsonLeal\DesbugandoBlog\Repository\Conectar;
+
 session_start();
 
+$conexaoObj = new Conectar($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
+$conexao = $conexaoObj->conectar();
 $resultArray = buscar_todas_postagens_publicadas($conexao);
 
 $_SESSION['postagens'] = $resultArray;
 header("Location: index.php");
-exit;
 
-function buscar_todas_postagens_publicadas($conexao) {
+function buscar_todas_postagens_publicadas($conexao)
+{
 
   $resultArray = array();
 
@@ -40,10 +46,13 @@ function buscar_todas_postagens_publicadas($conexao) {
     array_push($resultArray, $row);
   }
 
+  $conexao = null;
+
   return $resultArray;
 }
 
-function transformar_data_para_fuso_horario_br($timestamp) {
+function transformar_data_para_fuso_horario_br($timestamp)
+{
   $datetime = new DateTime($timestamp, new DateTimeZone('UTC'));
   $datetime->setTimezone(new DateTimeZone('America/Sao_Paulo'));
 

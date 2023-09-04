@@ -1,7 +1,12 @@
 <?php
+require_once __DIR__ . '/vendor/autoload.php';
 include_once 'header.php';
 include_once 'meses_pt_br.php';
+
 session_start();
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 if (isset($_SESSION['postagens']) && $_SESSION['atualizar'] === false) {
   $postagens = $_SESSION['postagens'];
