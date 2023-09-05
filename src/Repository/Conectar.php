@@ -2,6 +2,8 @@
 
 namespace RobsonLeal\DesbugandoBlog\Repository;
 
+use RobsonLeal\DesbugandoBlog\Environment\EnvironmentConfig;
+
 class Conectar
 {
   private $host;
@@ -9,12 +11,14 @@ class Conectar
   private $user;
   private $password;
 
-  public function __construct($host, $dbname, $user, $password)
+  public function __construct()
   {
-    $this->host = $host;
-    $this->dbname = $dbname;
-    $this->user = $user;
-    $this->password = $password;
+    EnvironmentConfig::load();
+
+    $this->host = $_ENV['DB_HOST'];
+    $this->dbname = $_ENV['DB_NAME'];
+    $this->user = $_ENV['DB_USER'];
+    $this->password = $_ENV['DB_PASS'];
   }
 
   public function conectar()
