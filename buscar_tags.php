@@ -6,7 +6,7 @@ use RobsonLeal\DesbugandoBlog\Repository\Conectar;
 
 session_start();
 
-$conexaoObj = new Conectar($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
+$conexaoObj = new Conectar();
 $conexao = $conexaoObj->conectar();
 
 function buscar_tags($conexao)
