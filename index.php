@@ -3,10 +3,16 @@ require_once __DIR__ . '/vendor/autoload.php';
 include_once 'header.php';
 include_once 'meses_pt_br.php';
 
+use RobsonLeal\DesbugandoBlog\Routes\Route;
+use RobsonLeal\DesbugandoBlog\Routes\RouteRegister;
+
 session_start();
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+$route = new Route();
+$routeRegister = new RouteRegister($route);
+$routeRegister->register();
+$requestPath = $_SERVER['REQUEST_URI'];
+$route->dispatch($requestPath);
 
 if (isset($_SESSION['postagens']) && $_SESSION['atualizar'] === false) {
   $postagens = $_SESSION['postagens'];
