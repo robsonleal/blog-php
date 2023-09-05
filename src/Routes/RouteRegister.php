@@ -2,7 +2,7 @@
 
 namespace RobsonLeal\DesbugandoBlog\Routes;
 
-use RobsonLeal\DesbugandoBlog\Controller\Teste;
+use RobsonLeal\DesbugandoBlog\Controller\PostagemController;
 
 class RouteRegister
 {
@@ -16,9 +16,9 @@ class RouteRegister
   public function register()
   {
     $this->route->add('/', function () {
-      header("Location: index.php");
+      header("Location: /postagens");
     });
 
-    $this->route->add('/teste', [Teste::class,"index"]);
+    $this->route->add('/postagens', [PostagemController::class,"index"]);
   }
 }
