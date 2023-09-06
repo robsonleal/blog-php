@@ -6,15 +6,19 @@ use RobsonLeal\DesbugandoBlog\Repository\TagRepository;
 
 class TagService
 {
-  private $tagsRepository;
+  private $tagRepository;
 
   public function __construct()
   {
-    $this->tagsRepository = new TagRepository();
+    $this->tagRepository = new TagRepository();
   }
 
   public function buscarTags()
   {
-    return $this->tagsRepository->buscarTags();
+    if (!isset($_SESSION['tags']) || $_SESSION['tags'] == "") {
+      $_SESSION['tags'] = $this->tagRepository->buscarTags();
+    }
+
+    return $_SESSION['tags'];
   }
 }

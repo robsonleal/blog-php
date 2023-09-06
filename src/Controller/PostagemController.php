@@ -25,33 +25,32 @@ class PostagemController
   public function show($id)
   {
     $currentPage = "detalhes";
-    $_SESSION['postagem'] = $this->postagemService->buscarPostagem($id);
+    $postagem = $this->postagemService->buscarPostagem($id);
     include __DIR__ . '/../Template/detalhes.php';
   }
 
   public function edit($id)
   {
     $currentPage = "editar";
-    if($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $this->postagemService->salvarPostagem($_POST);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $_SESSION['post'] = $_POST;
+      $this->postagemService->editarPostagem($_POST);
+      echo var_dump($_POST);
       header("Location: /");
-    } else {
-      $_SESSION['postagem'] = $this->postagemService->buscarPostagem($id);
-      $_SESSION['tags'] = $this->tagService->buscarTags();
-      include __DIR__ . '/../Template/editar.php';
     }
+    $postagem = $this->postagemService->buscarPostagem($id);
+    $tags = $this->tagService->buscarTags();
+    include __DIR__ . '/../Template/editar.php';
   }
 
   public function save()
   {
     $currentPage = "nova_postagem";
-
-    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $this->postagemService->salvarPostagem($_POST);
       header("Location: /");
     }
-
-    $_SESSION['tags'] = $this->tagService->buscarTags();
+    $tags = $this->tagService->buscarTags();
     include __DIR__ . '/../Template/criar.php';
   }
 
