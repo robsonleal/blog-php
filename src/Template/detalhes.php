@@ -1,12 +1,4 @@
-<?php
-include_once __DIR__ . '/header.php';
-
-if (isset($_SESSION['postagem']) && $_SESSION['postagem'] != "") {
-  $postagem = $_SESSION['postagem'];
-}
-
-?>
-
+<?php include_once __DIR__ . '/header.php'; ?>
 <main>
   <div class="container margin-header">
     <h1 class="text-center"><?php echo $postagem['TXT_TITULO']; ?></h1>
@@ -17,5 +9,4 @@ if (isset($_SESSION['postagem']) && $_SESSION['postagem'] != "") {
     </div>
   </div>
 </main>
-
 <?php include_once __DIR__ . '/footer.php'; ?>

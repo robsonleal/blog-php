@@ -1,13 +1,4 @@
-<?php
-$currentPage = 'nova_postagem';
-include_once __DIR__ . '/header.php';
-
-if (isset($_SESSION['tags'])) {
-  $tags = $_SESSION['tags'];
-}
-
-?>
-
+<?php include_once __DIR__ . '/header.php'; ?>
 <main>
   <div class="container margin-header">
     <form method="POST">
@@ -33,7 +24,7 @@ if (isset($_SESSION['tags'])) {
           </select>
         </div>
       </div>
-      <textarea name="txt_texto" id="container" class="editor" name="editor1"></textarea>
+      <textarea name="txt_texto" id="container" class="editor" name="editor"></textarea>
       <div class="row mt-5">
         <a href="/" class="btn btn-light col-5">Cancelar</a>
         <div class="col-2"></div>
@@ -42,17 +33,7 @@ if (isset($_SESSION['tags'])) {
     </form>
   </div>
 </main>
-
-<script src="http://desbugando-blog.com//src/Template/js/ckeditor.js"></script>
-
-<script>
-  ClassicEditor
-    .create(document.querySelector('.editor'), {
-      licenseKey: '',
-      toolbar: {
-        shouldNotGroupWhenFull: true
-      },
-    });
-</script>
-
-<?php include_once __DIR__ . '/footer.php'; ?>
+<?php
+include_once __DIR__ . '/ckeditor.html';
+include_once __DIR__ . '/footer.php';
+?>

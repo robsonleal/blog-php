@@ -118,10 +118,10 @@ class PostagemRepository
       }
 
       $sql = "INSERT INTO postagens_tags(
-              OID_POSTAGEM,
-              OID_TAG)
-            VALUES
-              (:oid_postagem, :oid_tag)";
+                OID_POSTAGEM,
+                OID_TAG)
+              VALUES
+                (:oid_postagem, :oid_tag)";
 
       $stmt = $this->conexao->prepare($sql);
       $stmt->bindParam(':oid_postagem', $postagem['oid_postagem']);
@@ -136,6 +136,55 @@ class PostagemRepository
       $this->conexao = null;
     } catch (\PDOException $e) {
       $_SESSION['alerta'] = "ERRO ao postar: " . $e->getMessage();
+      $this->conexao = null;
+    }
+  }
+
+  public function editarPostagem($postagem)
+  {
+    try {
+      $sql = "UPDATE postagens
+              SET
+                TXT_TITULO = :titulo,
+                TXT_TEXTO = :texto,
+                TXT_RESUMO = :resumo,
+                PAR_ATIVO = :ativo
+              WHERE
+                OID_POSTAGEM = :oid_postagem";
+
+      $stmt = $this->conexao->prepare($sql);
+
+      $stmt->bindParam(':titulo', $postagem['txt_titulo']);
+      $stmt->bindParam(':texto', $postagem['txt_texto']);
+      $stmt->bindParam(':resumo', $postagem['txt_resumo']);
+      $stmt->bindParam(':ativo', $postagem['par_ativo']);
+      $stmt->bindParam(':oid_postagem', $postagem['oid_postagem']);
+
+      $stmt->execute();
+
+      $sql = "DELETE FROM postagens_tags WHERE OID_POSTAGEM = :oid_postagem";
+      $stmt = $this->conexao->prepare($sql);
+      $stmt->bindParam(':oid_postagem', $postagem['oid_postagem']);
+      $stmt->execute();
+
+      $sql = "INSERT INTO postagens_tags(
+                OID_POSTAGEM,
+                OID_TAG)
+              VALUES
+                (:oid_postagem, :oid_tag)";
+
+      $stmt = $this->conexao->prepare($sql);
+      $stmt->bindParam(':oid_postagem', $postagem['oid_postagem']);
+
+      foreach ($postagem['txt_tags'] as $tag) {
+        $stmt->bindParam(':oid_tag', $tag);
+        $stmt->execute();
+      }
+
+      $_SESSION['alerta'] = "Postagem atualizada com sucesso!";
+    } catch (\PDOException $e) {
+      $_SESSION['alerta'] = "ERRO ao atualizar: " . $e->getMessage();
+    } finally {
       $this->conexao = null;
     }
   }

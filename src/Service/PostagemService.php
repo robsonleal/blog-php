@@ -2,15 +2,17 @@
 
 namespace RobsonLeal\DesbugandoBlog\Service;
 
-use RobsonLeal\DesbugandoBlog\Repository\PostagemRepository;
+use RobsonLeal\DesbugandoBlog\Repository\{PostagemRepository, TagRepository};
 
 class PostagemService
 {
   private $postagemRepository;
+  private $tagRepository;
 
   public function __construct()
   {
     $this->postagemRepository = new PostagemRepository();
+    $this->tagRepository = new TagRepository();
   }
 
   public function buscarPostagensAtivas()
@@ -20,31 +22,52 @@ class PostagemService
       $_SESSION['atualizar'] = false;
     }
 
+    $_SESSION['postagem'] = "";
+
     return $_SESSION['postagens'];
   }
 
   public function buscarPostagem($id)
   {
-    return $this->postagemRepository->buscarPostagem($id);
+    if (!isset($_SESSION['postagem']) || $_SESSION['postagem'] == "") {
+      $_SESSION['postagem'] = $this->postagemRepository->buscarPostagem($id);
+    }
+
+    return $_SESSION['postagem'];
+  }
+
+  public function editarPostagem($postagem)
+  {
+    $postagem['txt_resumo'] = $this->criarResumo($postagem['TXT_TEXTO']);
+    $_SESSION['atualizar'] = true;
+
+    $this->postagemRepository->editarPostagem($postagem);
   }
 
   public function salvarPostagem($postagem)
   {
-    $postagem['txt_resumo'] = substr($postagem['txt_texto'], 0, 160);
+    $postagem['txt_resumo'] = $this->criarResumo($postagem['TXT_TEXTO']);
 
-    if (!$this->validar_campos_postagem($postagem)) {
+    if (!$this->validarCamposPostagem($postagem)) {
       //TODO lançar exception;
     }
-
+    
+    $_SESSION['atualizar'] = true;
     return $this->postagemRepository->salvarPostagem($postagem);
   }
 
   public function deletarPostagem($id)
   {
+    $_SESSION['atualizar'] = true;
     return $this->postagemRepository->deletarPostagem($id);
   }
 
-  private function validar_campos_postagem($postagem)
+  private function criarResumo($string)
+  {
+    return substr($string, 0, 160);
+  }
+
+  private function validarCamposPostagem($postagem)
   {
     $alerta = "";
 
