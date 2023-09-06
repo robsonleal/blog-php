@@ -32,9 +32,14 @@ class PostagemController
   public function edit($id)
   {
     $currentPage = "editar";
-    $_SESSION['postagem'] = $this->postagemService->buscarPostagem($id);
-    $_SESSION['tags'] = $this->tagService->buscarTags();
-    include __DIR__ . '/../Template/editar.php';
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $this->postagemService->salvarPostagem($_POST);
+      header("Location: /");
+    } else {
+      $_SESSION['postagem'] = $this->postagemService->buscarPostagem($id);
+      $_SESSION['tags'] = $this->tagService->buscarTags();
+      include __DIR__ . '/../Template/editar.php';
+    }
   }
 
   public function save()
@@ -43,9 +48,17 @@ class PostagemController
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
       $this->postagemService->salvarPostagem($_POST);
+      header("Location: /");
     }
 
     $_SESSION['tags'] = $this->tagService->buscarTags();
     include __DIR__ . '/../Template/criar.php';
+  }
+
+  public function delete($id)
+  {
+    $this->postagemService->deletarPostagem($id);
+
+    header("Location: /");
   }
 }

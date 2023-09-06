@@ -34,6 +34,11 @@ class PostagemService
     return $this->postagemRepository->salvarPostagem($postagem);
   }
 
+  public function deletarPostagem($id)
+  {
+    return $this->postagemRepository->deletarPostagem($id);
+  }
+
   private function validar_campos_postagem($postagem)
   {
     $alerta = "";

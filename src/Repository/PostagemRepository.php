@@ -39,15 +39,14 @@ class PostagemRepository
       $resultSet = $this->conexao->query($sql);
 
       while ($row = $resultSet->fetch()) {
-
         $row['TXT_TAGS'] = explode(',', $row['TXT_TAGS'] ?? '');
         $row['DAT_ALTERACAO'] = FormatadorData::fusoHorarioBr($row['DAT_ALTERACAO']);
 
         array_push($resultArray, $row);
       }
     } catch (\PDOException $e) {
-      $this->conexao = null;
       $_SESSION['alerta'] = "ERRO ao buscar postagem: " . $e->getMessage();
+      $this->conexao = null;
     }
 
     $this->conexao = null;
@@ -87,10 +86,9 @@ class PostagemRepository
 
       $_SESSION['alerta'] = "Postagem encontrada!";
     } catch (\PDOException $e) {
-      $this->conexao = null;
       $_SESSION['alerta'] = "ERRO ao buscar postagem: " . $e->getMessage();
+      $this->conexao = null;
     }
-
     $resultSet['TXT_TAGS'] = explode(',', $resultSet['TXT_TAGS']);
 
     $this->conexao = null;
@@ -137,8 +135,36 @@ class PostagemRepository
 
       $this->conexao = null;
     } catch (\PDOException $e) {
-      $this->conexao = null;
       $_SESSION['alerta'] = "ERRO ao postar: " . $e->getMessage();
+      $this->conexao = null;
+    }
+  }
+
+  public function deletarPostagem($id)
+  {
+    try {
+      $sql = "DELETE FROM
+              postagens_tags
+            WHERE
+              OID_POSTAGEM = :id_postagem";
+
+      $stmt = $this->conexao->prepare($sql);
+      $stmt->bindParam(':id_postagem', $id);
+      $stmt->execute();
+
+      $sql = "DELETE FROM
+              postagens
+            WHERE
+              OID_POSTAGEM = :id_postagem";
+
+      $stmt = $this->conexao->prepare($sql);
+      $stmt->bindParam(':id_postagem', $id);
+      $stmt->execute();
+      $_SESSION['alerta'] = "Excluido com sucesso!";
+      $this->conexao = null;
+    } catch (\PDOException $e) {
+      $_SESSION['alerta'] = "Erro ao excluir o registro: " . $e->getMessage();
+      $this->conexao = null;
     }
   }
 }

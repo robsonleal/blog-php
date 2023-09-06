@@ -31,5 +31,7 @@ class RouteRegister
     $this->route->add('/postagens/{:id}/editar', [PostagemController::class, "edit"]);
 
     $this->route->add('/postagens/salvar', [PostagemController::class, "save"]);
+
+    $this->route->add('/postagens/{:id}/deletar', [PostagemController::class, "delete"]);
   }
 }

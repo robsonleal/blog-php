@@ -18,7 +18,7 @@ if (isset($_SESSION['tags'])) {
 
 <main>
   <div class="container margin-header">
-    <form action="postar.php" method="POST">
+    <form method="POST">
       <div class="row mb-5">
         <div class="col-8">
           <div class="form-floating mb-3">
@@ -46,9 +46,9 @@ if (isset($_SESSION['tags'])) {
       </div>
       <textarea name="txt_texto" id="container" class="editor" name="editor"><?php echo htmlspecialchars($postagem['TXT_TEXTO']); ?></textarea>
       <div class="row mt-5">
-        <a href="detalhes.php" class="btn btn-light col-5">Cancelar</a>
+        <a href="/" class="btn btn-light col-5">Cancelar</a>
         <div class="col-2"></div>
-        <button type="submit" class="btn btn-dark col-5">Criar</button>
+        <button type="submit" class="btn btn-dark col-5">Editar</button>
       </div>
     </form>
   </div>
