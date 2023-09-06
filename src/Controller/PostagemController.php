@@ -2,15 +2,17 @@
 
 namespace RobsonLeal\DesbugandoBlog\Controller;
 
-use RobsonLeal\DesbugandoBlog\Service\PostagemService;
+use RobsonLeal\DesbugandoBlog\Service\{PostagemService, TagService};
 
 class PostagemController
 {
   private $postagemService;
+  private $tagService;
 
   public function __construct()
   {
     $this->postagemService = new PostagemService();
+    $this->tagService = new TagService();
   }
 
   public function index()
@@ -25,5 +27,13 @@ class PostagemController
     $currentPage = "detalhes";
     $_SESSION['postagem'] = $this->postagemService->buscarPostagem($id);
     include __DIR__ . '/../Template/detalhes.php';
+  }
+
+  public function edit($id)
+  {
+    $currentPage = "editar";
+    $_SESSION['postagem'] = $this->postagemService->buscarPostagem($id);
+    $_SESSION['tags'] = $this->tagService->buscarTags();
+    include __DIR__ . '/../Template/editar.php';
   }
 }
