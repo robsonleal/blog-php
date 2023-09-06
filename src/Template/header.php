@@ -15,10 +15,10 @@
   <!-- Font awesome -->
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
   <!--  highlight badge  -->
-  <script src="./highlightjs-badge/highlightjs-badge.min.js"></script>
+  <script src="http://desbugando-blog.com//src/Template/js/highlightjs-badge.min.js"></script>
   <script>hljs.highlightAll();</script>
   <!-- local CSS -->
-  <link rel="stylesheet" href="src/Template/styles/styles.css">
+  <link rel="stylesheet" href="http://desbugando-blog.com//src/Template/styles/styles.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">

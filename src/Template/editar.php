@@ -1,6 +1,5 @@
 <?php
-include_once 'header.php';
-session_start();
+include_once __DIR__ . '/header.php';
 
 // Debug config
 ini_set('display_errors', 1);
@@ -9,15 +8,12 @@ error_reporting(E_ALL);
 
 if (isset($_SESSION['postagem']) && $_SESSION['postagem'] != "") {
   $postagem = $_SESSION['postagem'];
-} else {
-  include_once 'buscar_editar.php';
 }
 
 if (isset($_SESSION['tags'])) {
   $tags = $_SESSION['tags'];
-} else {
-  include_once 'buscar_tags.php';
 }
+
 ?>
 
 <main>
@@ -48,7 +44,7 @@ if (isset($_SESSION['tags'])) {
           </select>
         </div>
       </div>
-      <textarea name="txt_texto" id="container" class="editor" name="editor1"><?php echo htmlspecialchars($postagem['TXT_TEXTO']); ?></textarea>
+      <textarea name="txt_texto" id="container" class="editor" name="editor"><?php echo htmlspecialchars($postagem['TXT_TEXTO']); ?></textarea>
       <div class="row mt-5">
         <a href="detalhes.php" class="btn btn-light col-5">Cancelar</a>
         <div class="col-2"></div>
@@ -58,7 +54,7 @@ if (isset($_SESSION['tags'])) {
   </div>
 </main>
 
-<script src="./CKEditor5/ckeditor.js"></script>
+<script src="http://desbugando-blog.com//src/Template/js/ckeditor.js"></script>
 
 <script>
   ClassicEditor
@@ -70,4 +66,4 @@ if (isset($_SESSION['tags'])) {
     });
 </script>
 
-<?php include_once 'footer.php'; ?>
+<?php include_once __DIR__ . '/footer.php'; ?>
