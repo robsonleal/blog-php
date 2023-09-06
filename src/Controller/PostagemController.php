@@ -36,4 +36,16 @@ class PostagemController
     $_SESSION['tags'] = $this->tagService->buscarTags();
     include __DIR__ . '/../Template/editar.php';
   }
+
+  public function save()
+  {
+    $currentPage = "nova_postagem";
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $this->postagemService->salvarPostagem($_POST);
+    }
+
+    $_SESSION['tags'] = $this->tagService->buscarTags();
+    include __DIR__ . '/../Template/criar.php';
+  }
 }
