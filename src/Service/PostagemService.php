@@ -38,22 +38,28 @@ class PostagemService
 
   public function editarPostagem($postagem)
   {
-    $postagem['txt_resumo'] = $this->criarResumo($postagem['TXT_TEXTO']);
-    $_SESSION['atualizar'] = true;
+    try{
+      $this->validarCamposPostagem($postagem);
+      $postagem['txt_resumo'] = $this->criarResumo($postagem['TXT_TEXTO']);
+      $_SESSION['atualizar'] = true;
 
-    $this->postagemRepository->editarPostagem($postagem);
+      $this->postagemRepository->editarPostagem($postagem);
+    } catch(\Exception $e) {
+      $_SESSION['alerta'] = $e->getMessage();
+    }
   }
 
   public function salvarPostagem($postagem)
   {
-    $postagem['txt_resumo'] = $this->criarResumo($postagem['TXT_TEXTO']);
+    try {
+      $this->validarCamposPostagem($postagem);
+      $postagem['txt_resumo'] = $this->criarResumo($postagem['TXT_TEXTO']);
+      $_SESSION['atualizar'] = true;
 
-    if (!$this->validarCamposPostagem($postagem)) {
-      //TODO lançar exception;
+      $this->postagemRepository->salvarPostagem($postagem);
+    } catch(\Exception $e) {
+      $_SESSION['alerta'] = $e->getMessage();
     }
-
-    $_SESSION['atualizar'] = true;
-    return $this->postagemRepository->salvarPostagem($postagem);
   }
 
   public function deletarPostagem($id)
@@ -80,8 +86,8 @@ class PostagemService
     elseif (!isset($postagem["txt_texto"]) || ($postagem["txt_texto"] == ""))
       $alerta = "Publicação não pode ser vazia";
 
-    $_SESSION['alerta'] = $alerta;
-
-    return $alerta == "" ? true : false;
+    if($alerta != "") {
+      throw new \Exception($alerta);
+    }
   }
 }
