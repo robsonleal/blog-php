@@ -25,7 +25,7 @@
   <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid p-2 mx-3">
-        <a class="navbar-brand" href="index.php">{...} Desbugando Blog</a>
+        <a class="navbar-brand" href="/">{...} Desbugando Blog</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,11 +35,11 @@
         <div class="collapse navbar-collapse justify-content-end text-uppercase" id="navbarNav">
           <ul class="navbar-nav">
             <?php if($currentPage == 'detalhes'): ?>
-            <li class="nav-item active"><a class="nav-link" href="editar.php">Editar Postagem</a></li>
-            <li class="nav-item active"><a class="nav-link" href="excluir.php">Excluir Postagem</a></li>
+            <li class="nav-item active"><a class="nav-link" href="/postagens/<?php echo $_SESSION['postagem']['OID_POSTAGEM']?>/editar">Editar Postagem</a></li>
+            <li class="nav-item active"><a class="nav-link" href="/postagens/<?php echo $_SESSION['postagem']['OID_POSTAGEM']?>/deletar">Excluir Postagem</a></li>
             <?php endif; ?>
             <?php if($currentPage != 'nova_postagem'): ?>
-            <li class="nav-item active"><a class="nav-link" href="nova_postagem.php">+ Nova Postagem</a></li>
+            <li class="nav-item active"><a class="nav-link" href="/postagens/salvar">+ Nova Postagem</a></li>
             <?php endif; ?>
           </ul>
         </div>

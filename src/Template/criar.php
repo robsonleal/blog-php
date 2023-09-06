@@ -35,7 +35,7 @@ if (isset($_SESSION['tags'])) {
       </div>
       <textarea name="txt_texto" id="container" class="editor" name="editor1"></textarea>
       <div class="row mt-5">
-        <a href="index.php" class="btn btn-light col-5">Cancelar</a>
+        <a href="/" class="btn btn-light col-5">Cancelar</a>
         <div class="col-2"></div>
         <button type="submit" class="btn btn-dark col-5">Criar</button>
       </div>
