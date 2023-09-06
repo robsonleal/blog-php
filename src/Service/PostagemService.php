@@ -51,7 +51,7 @@ class PostagemService
     if (!$this->validarCamposPostagem($postagem)) {
       //TODO lançar exception;
     }
-    
+
     $_SESSION['atualizar'] = true;
     return $this->postagemRepository->salvarPostagem($postagem);
   }
