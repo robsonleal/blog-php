@@ -1,18 +1,16 @@
 <?php
 $currentPage = 'nova_postagem';
-include_once 'header.php';
-session_start();
+include_once __DIR__ . '/header.php';
 
 if (isset($_SESSION['tags'])) {
   $tags = $_SESSION['tags'];
-} else {
-  include_once 'buscar_tags.php';
 }
+
 ?>
 
 <main>
   <div class="container margin-header">
-    <form action="postar.php" method="POST">
+    <form method="POST">
       <div class="row mb-5">
         <div class="col-8">
           <div class="form-floating mb-3">
@@ -45,7 +43,7 @@ if (isset($_SESSION['tags'])) {
   </div>
 </main>
 
-<script src="./CKEditor5/ckeditor.js"></script>
+<script src="http://desbugando-blog.com//src/Template/js/ckeditor.js"></script>
 
 <script>
   ClassicEditor
@@ -57,4 +55,4 @@ if (isset($_SESSION['tags'])) {
     });
 </script>
 
-<?php include_once 'footer.php'; ?>
+<?php include_once __DIR__ . '/footer.php'; ?>
