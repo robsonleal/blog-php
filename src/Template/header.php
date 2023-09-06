@@ -18,7 +18,7 @@
   <script src="./highlightjs-badge/highlightjs-badge.min.js"></script>
   <script>hljs.highlightAll();</script>
   <!-- local CSS -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="src/Template/styles/styles.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">

@@ -25,7 +25,24 @@ class Route
         $callback();
       }
     } else {
-      // TODO aqui vai a página de not found
+      foreach ($this->routes as $path => $callback) {
+        $pattern = preg_replace('#\{:([a-zA-Z0-9_]+)\}#', '(?P<$1>[a-zA-Z0-9_]+)', $path);
+
+        if (preg_match("#^$pattern$#", $requestPath, $matches)) {
+          array_shift($matches);
+          $indexedMatches = array_values($matches);
+
+          if (is_array($callback)) {
+            $className = $callback[0];
+            $methodName = $callback[1];
+            $object = new $className();
+            call_user_func_array([$object, $methodName], $indexedMatches);
+          } else {
+            call_user_func_array($callback, $indexedMatches);
+          }
+          return;
+        }
+      }
     }
   }
 }

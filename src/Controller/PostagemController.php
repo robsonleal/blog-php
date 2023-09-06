@@ -19,4 +19,11 @@ class PostagemController
     $postagens = $this->postagemService->buscarPostagensAtivas();
     include __DIR__ . '/../Template/postagens.php';
   }
+
+  public function show($id)
+  {
+    $currentPage = "detalhes";
+    $_SESSION['postagem'] = $this->postagemService->buscarPostagem($id);
+    include __DIR__ . '/../Template/detalhes.php';
+  }
 }

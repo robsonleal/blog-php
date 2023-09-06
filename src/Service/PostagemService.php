@@ -17,4 +17,9 @@ class PostagemService
   {
     return $this->postagemRepository->buscarPostagensAtivas();
   }
+
+  public function buscarPostagem($id)
+  {
+    return $this->postagemRepository->buscarPostagem($id);
+  }
 }
