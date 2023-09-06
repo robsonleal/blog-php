@@ -15,7 +15,12 @@ class PostagemService
 
   public function buscarPostagensAtivas()
   {
-    return $this->postagemRepository->buscarPostagensAtivas();
+    if (!isset($_SESSION['postagens']) || $_SESSION['postagens'] == "" || $_SESSION['atualizar'] === true) {
+      $_SESSION['postagens'] = $this->postagemRepository->buscarPostagensAtivas();
+      $_SESSION['atualizar'] = false;
+    }
+
+    return $_SESSION['postagens'];
   }
 
   public function buscarPostagem($id)
