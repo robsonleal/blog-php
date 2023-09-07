@@ -8,4 +8,4 @@ Se você está interessado em acompanhar a evolução deste projeto, todo o hist
 - Conferir o projeto:
 
 Hospedei o projeto na plataforma InfinityFree, que oferece um serviço de hospedagem básico e gratuito. Se você estiver interessado em ver como o projeto ficou, sinta-se à vontade para conferir através do link 
-http://desbugando.rf.gd/
+https://desbugando.rf.gd/
